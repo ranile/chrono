@@ -8,7 +8,7 @@ use core::fmt;
     feature = "now",
     not(all(
         target_arch = "wasm32",
-        feature = "wasmbind",
+        feature = "icp",
         not(any(target_os = "emscripten", target_os = "wasi", target_os = "linux"))
     ))
 ))]
@@ -88,7 +88,7 @@ impl Utc {
     /// ```
     #[cfg(not(all(
         target_arch = "wasm32",
-        feature = "wasmbind",
+        feature = "icp",
         not(any(target_os = "emscripten", target_os = "wasi", target_os = "linux"))
     )))]
     #[must_use]
@@ -101,13 +101,13 @@ impl Utc {
     /// Returns a `DateTime` which corresponds to the current date and time.
     #[cfg(all(
         target_arch = "wasm32",
-        feature = "wasmbind",
+        feature = "icp",
         not(any(target_os = "emscripten", target_os = "wasi", target_os = "linux"))
     ))]
     #[must_use]
     pub fn now() -> DateTime<Utc> {
-        let now = js_sys::Date::new_0();
-        DateTime::<Utc>::from(now)
+        let now = ic_cdk::api::time();
+        DateTime::<Utc>::from_timestamp_nanos(now as i64)
     }
 }
 

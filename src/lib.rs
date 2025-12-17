@@ -30,7 +30,7 @@
 //!   `alloc` and adds interoperation with standard library types and traits.
 //! - `clock`: Enables reading the local timezone (`Local`). This is a superset of `now`.
 //! - `now`: Enables reading the system time (`now`).
-//! - `wasmbind`: Interface with the JS Date API for the `wasm32` target.
+//! - `icp`: Use `ic-cdk` to get current time.
 //!
 //! Optional features:
 //!
